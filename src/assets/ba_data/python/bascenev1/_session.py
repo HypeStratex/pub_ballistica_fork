@@ -286,6 +286,20 @@ class Session:
                     transient=True,
                 )
                 return False
+                    for plr in _bascenev1.get_game_roster():
+            if player.inputdevice.client_id == plr['client_id']:
+                if len(plr['players']) > 0:
+                    #TOFIX: it requires new Lstr
+                    _bascenev1.broadcastmessage(
+                    babase.Lstr(
+                        resource='playerLimitReachedText',
+                        subs=[('${COUNT}', str(1))],
+                    ),
+                    color=(0.8, 0.0, 0.0),
+                    clients=[player.inputdevice.client_id,],
+                    transient=True,
+                    )
+                    return False
 
         # Rejoin cooldown.
         identifier = player.get_v1_account_id()
